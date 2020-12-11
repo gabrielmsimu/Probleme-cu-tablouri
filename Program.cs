@@ -18,7 +18,48 @@ namespace Probleme_cu_tablouri
             //Problema_4();
             //Problema_5();
             //Problema_6();
-            Problema_7();
+            //Problema_7();
+            Problema_8();
+        }
+
+
+        /// <summary>
+        /// Rotire. Se da un vector cu n elemente. 
+        /// Rotiti elementele vectorului cu o pozitie spre stanga. 
+        /// Prin rotire spre stanga primul element devine ultimul, al doilea devine primul etc. 
+        /// </summary>
+        private static void Problema_8()
+        {
+            Console.WriteLine("Introduceti numarul de elemente al vectorului: ");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                v[i] = rnd.Next(0, 10);
+            }
+
+            Console.WriteLine("Before: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+            int aux = v[0];
+            for (int i = 0; i < n-1; i++)
+            {
+                
+                v[i] = v[i + 1];
+            }
+            v[n-1] = aux;
+
+            Console.WriteLine("After: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+
         }
 
 
