@@ -19,7 +19,53 @@ namespace Probleme_cu_tablouri
             //Problema_5();
             //Problema_6();
             //Problema_7();
-            Problema_8();
+            //Problema_8();
+            Problema_9();
+        }
+
+
+        /// <summary>
+        /// Rotire k. Se da un vector cu n elemente. Rotiti elementele vectorului cu k pozitii spre stanga.
+        /// </summary>
+        private static void Problema_9()
+        {
+            Console.WriteLine("Introduceti numarul de elemente al vectorului: ");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                v[i] = rnd.Next(0, 10);
+            }
+
+            Console.WriteLine("Cu cate pozitii spre stanga doriti sa rotiti vectorul?");
+            int k = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Before: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+            int aux;
+
+            for (int i = 1; i <= k; i++)
+            {
+                aux = v[0];
+                for (int j = 0; j < n-1; j++)
+                {
+                    v[j] = v[j + 1];
+                }
+                v[n - 1] = aux;
+
+            }
+
+            Console.WriteLine("After: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
         }
 
 
