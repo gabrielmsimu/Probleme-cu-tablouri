@@ -20,7 +20,149 @@ namespace Probleme_cu_tablouri
             //Problema_6();
             //Problema_7();
             //Problema_8();
-            Problema_9();
+            //Problema_9();
+            //Problema_10(); //Binary Search -> de intrebat
+            //Problema_11(); //Ciurul lui Erastostene -> de intrebat
+            //Problema_12(); //Selection Sort
+            //Problema_13(); //Insertion Sort
+        }
+
+        
+
+
+        /// <summary>
+        /// Sortare prin insertie. Implementati algoritmul de sortare <Insertion Sort>. 
+        /// </summary>
+        private static void Problema_13()
+        {
+            Console.WriteLine("Introduceti numarul de elemente al vectorului: ");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                v[i] = rnd.Next(0, 100);
+            }
+
+            Console.WriteLine("Before: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+            int aux;
+            for (int i = 1; i < v.Length; i++)
+            {
+                for (int k = i; k > 0 && v[k] < v[k - 1]; k--) 
+                {
+                    aux = v[k];
+                    v[k] = v[k - 1];
+                    v[k - 1] = aux;
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("After:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+
+        }
+
+        /// <summary>
+        /// Sortare selectie. Implementati algoritmul de sortare <Selection Sort>. 
+        /// </summary>
+        private static void Problema_12()
+        {
+            Console.WriteLine("Cate elemente doriti sa aiba vectorul?");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                v[i] = rnd.Next(0, 100);
+            }
+
+            Console.WriteLine("Before:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+            int aux;
+            for (int i = 0; i < n; i++)
+            {
+                int k = i;
+                for (int j = i+1; j < n; j++)
+                {
+                    if (v[j] < v[k]) 
+                    {
+                        k = j;
+                    }
+                }
+                aux = v[i];
+                v[i] = v[k];
+                v[k] = aux;
+            }
+
+
+            Console.WriteLine("After:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Se da un numar natural n. 
+        /// Se cere sa se afiseze toate numerele prime mai mici sau egale cu n (ciurul lui Eratostene).
+        /// </summary>
+        private static void Problema_11()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Cautare binara. Se da un vector cu n elemente sortat in ordine crescatoare. 
+        /// Se cere sa se determine pozitia unui element dat k. 
+        /// Daca elementul nu se gaseste in vector rezultatul va fi -1. 
+        /// </summary>
+        private static void Problema_10()
+        {
+            Console.WriteLine("cate elemente doriti sa aiba vectorul?");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] v = new int[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                v[i] = i + 2000;
+            }
+
+            Console.WriteLine("Afisare vector:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Introduceti valoarea a carei pozitie doriti sa o gasiti:");
+            int k = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < n; i++)
+            {
+                if (v[i] == k)
+                {
+                    Console.WriteLine($"Pozitia elementului este {i}");
+                }
+            }
+
         }
 
 
