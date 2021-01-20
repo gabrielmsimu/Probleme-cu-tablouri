@@ -21,13 +21,102 @@ namespace Probleme_cu_tablouri
             //Problema_7();
             //Problema_8();
             //Problema_9();
-            //Problema_10(); //Binary Search -> de intrebat
-            //Problema_11(); //Ciurul lui Erastostene -> de intrebat
+            //Problema_10(); //Binary Search 
+            //Problema_11(); //Ciurul lui Erastostene
             //Problema_12(); //Selection Sort
             //Problema_13(); //Insertion Sort
+            //Problema_14();
+            Problema_15();
         }
 
-        
+
+
+        /// <summary>
+        /// Modificati un vector prin eliminarea elementelor care se repeta, fara a folosi un alt vector. 
+        /// </summary>
+        private static void Problema_15()
+        {
+            int[] v = { 1, 0, 0, 3, 4, 3, 2 };
+            int n = v.Length;
+
+            //Afisare vector:
+            Console.WriteLine("Afisare vector:");
+            for (int i = 0; i < v.Length; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i+1; j < n; j++)
+                {
+                    if (v[i] == v[j])
+                    {
+                        for (int k = j; k < n-1; k++)
+                        {
+                            v[k] = v[k + 1];
+                        }
+                        n--;
+                    }
+                }
+            }
+
+            //Afisare vector:
+            Console.WriteLine("Afisare vector:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+            Console.WriteLine();
+
+
+        }
+
+
+
+        /// <summary>
+        /// Interschimbati elementele unui vector in asa fel incat la final toate valorile egale cu zero sa ajunga la sfarsit. 
+        /// (nu se vor folosi vectori suplimentari - operatia se va realiza inplace cu un algoritm eficient - se va face o singura parcugere a vectorului).
+        /// </summary>
+        private static void Problema_14()
+        {
+            
+            int [] v = { 0, 1, 2, 3, 0, 4, 5, 6, 0, 8 };
+
+            //Afisare vector:
+            Console.WriteLine("Afisare vector:");
+            for (int i = 0; i < v.Length; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+            Console.WriteLine();
+
+            int aux;
+            int countzero = 0;
+            for (int i = v.Length-1; i >= 0; i--)
+            {
+                if (v[i] == 0)
+                {
+                    countzero++;
+                    aux = v[i];
+                    v[i] =v[v.Length - countzero];
+                    v[v.Length - countzero] = aux;
+                }
+            }
+
+
+            //Afisare vector:
+            Console.WriteLine("Afisare vector:");
+            for (int i = 0; i < v.Length; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+            Console.WriteLine();
+
+        }
+
+
 
 
         /// <summary>
@@ -72,7 +161,7 @@ namespace Probleme_cu_tablouri
         }
 
         /// <summary>
-        /// Sortare selectie. Implementati algoritmul de sortare <Selection Sort>. 
+        /// Sortare selectie. Implementati algoritmul de sortare Selection Sort. 
         /// </summary>
         private static void Problema_12()
         {
@@ -124,7 +213,35 @@ namespace Probleme_cu_tablouri
         /// </summary>
         private static void Problema_11()
         {
-            throw new NotImplementedException();
+            int n = 100;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (Prim(i)==1)
+                {
+                    Console.Write($"{i, 4} ");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Testeaza primalitatea numarului de la problema 11
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        private static int Prim(int i)
+        {
+            if (i < 2) return 0;
+            if (i == 2) return 1;
+            if (i % 2 == 0) return 0;
+            for (int j = 3; j*j <i ; j++)
+            {
+                if (i % j == 0)
+                {
+                    return 0;
+                }
+            }
+            return 1;
         }
 
 
@@ -140,9 +257,11 @@ namespace Probleme_cu_tablouri
 
             int[] v = new int[n];
 
+            Random rnd = new Random();
+
             for (int i = 0; i < n; i++)
             {
-                v[i] = i + 2000;
+                v[i] = rnd.Next(100);
             }
 
             Console.WriteLine("Afisare vector:");
@@ -152,17 +271,62 @@ namespace Probleme_cu_tablouri
             }
 
             Console.WriteLine();
-            Console.WriteLine("Introduceti valoarea a carei pozitie doriti sa o gasiti:");
-            int k = int.Parse(Console.ReadLine());
 
+            //Sortam prin Selection Sort
+            int aux;
             for (int i = 0; i < n; i++)
             {
-                if (v[i] == k)
+                int k = i;
+                for (int j = i + 1; j < n; j++)
                 {
-                    Console.WriteLine($"Pozitia elementului este {i}");
+                    if (v[j] < v[k])
+                    {
+                        k = j;
+                    }
+                }
+                aux = v[i];
+                v[i] = v[k];
+                v[k] = aux;
+            }
+            Console.WriteLine("Vectorul sortat: ");
+            for (int i = 0; i < v.Length; i++)
+            {
+                Console.Write($"{v[i]} ");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Introduceti valoarea a carei pozitie doriti sa o gasiti:");
+            int key = int.Parse(Console.ReadLine());
+
+            int left = 0, right = v.Length - 1, mid;
+            int pos = -1;
+
+            while (left <= right)
+            {
+                mid = (left + right) / 2;
+                if (key < v[mid])
+                {
+                    right = mid - 1;
+                }
+                else if (key > v[mid])
+                {
+                    left = mid + 1;
+                }
+                else
+                {
+                    pos = mid;
+                    break;
                 }
             }
 
+            if (pos == -1)
+            {
+                Console.WriteLine($"Nu am gasit numarul {key} in vector.");
+            }
+            else
+            {
+                Console.WriteLine($"Numarul {key} se afla in vector pe pozitia {pos}.");
+            }
         }
 
 
